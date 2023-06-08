@@ -19,15 +19,16 @@ form.addEventListener("submit", (event) => {
         if (dividend == "" || divider == "" ) {
         result.innerText = "Division not performed. Both values are required in inputs. Try again.";}
 
-        if( dividend ==+ 20 && divider ==+ -3)   
+        if( dividend === 20 && divider === -3)   
        { result.innerText = 'Division not performed. Invalid number provided. Try again';}
       console.log(err)
      }
 
     catch (error) {
-        console.error(new Error ('invalid number provided'))}
+        // console.log(new Error ('invalid number provided'))
+      }
 
-        if ( dividend == 'YOLO' || divider == '+++' ){
+        if ( dividend === 'YOLO' || divider === '+++' ){
         window.addEventListener("submit", () => {
             document.body.innerHTML = /*html*/ `<h1>Something critical went wrong. Please reload the page....<h1>`;})
             console.error('error occured')
