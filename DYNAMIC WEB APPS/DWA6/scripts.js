@@ -1,4 +1,3 @@
-// @ts-check
 // Fully working scripts.js file
 
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
@@ -75,27 +74,19 @@ document.querySelector("[data-search-authors]").appendChild(authorsHtml);
  * I created an object that will allow me to call the day and night using day or night, instead of the if else statement. *This is for theme, which will enable the user to change the mode from day and night
  */
 
-const theme = {
-  day: {
-    dark: "10, 10, 20",
-    light: "255, 255, 255",
-  },
-  night: {
-    dark: "255, 255, 255",
-    light: "10, 10, 20",
-  },
-};
-document
-  .querySelector("[data-settings-form]")
-  .addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (theme === night) {
-      document.documentElement.style.setProperty("night");
-    } else if (theme === day) {
-      document.documentElement.style.setProperty("day");
-    }
-  });
-document.querySelector("[data-settings-overlay]").open = false;
+document.querySelector("[data-settings-form]").addEventListener('submit', (event) => {
+  event.preventDefault()
+  const formData = new FormData(event.target)
+  const { theme } = Object.fromEntries(formData)
+  if (theme === 'night') {
+      document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
+      document.documentElement.style.setProperty('--color-light', '10, 10, 20');
+  } else {
+      document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
+      document.documentElement.style.setProperty('--color-light', '255, 255, 255');
+  }
+  document.querySelector("[data-settings-overlay]").open = false
+})
 
 document.querySelector("[data-list-button]").innerText = `Show more (${
   books.length - BOOKS_PER_PAGE
