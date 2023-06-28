@@ -2,6 +2,13 @@
 
 import { books, authors, genres, BOOKS_PER_PAGE } from "./data.js";
 
+
+/**
+ * This is an object literal that contains all the references to all the HTML elements 
+ * that are referenced throught the app either through initialization or while its running 
+ * through event listeners. This is to ensure that they are all accessed in a structured manner.
+ * 
+ */
 let page = 1;
 let matches = books;
 
@@ -9,39 +16,66 @@ let matches = books;
  * This is the function allows you to preview, to be able to call authors, title, id and image.
  */
 
-
-function createStarting = () => {
-const starting = document.createDocumentFragment();
-const preview = (author, id, image, title) => {
-  const element = document.createElement("button");
-  element.classList = "preview";
-  element.setAttribute("data-preview", id);
-
-  element.innerHTML = `
-    <img
-        class="preview__image"
-        src="${image}"
-    />
-    
-    <div class="preview__info">
+const previewModule = {
+  createPreviewElement: function(author, id, image, title) {
+    const element = document.createElement('button');
+    element.classList = 'preview';
+    element.setAttribute('data-preview', id);
+    element.innerHTML = `
+      <img class="preview__image" src="${image}" />
+      <div class="preview__info">
         <h3 class="preview__title">${title}</h3>
         <div class="preview__author">${authors[author]}</div>
-    </div>
-`;
+      </div>
+    `;
+    return element;
+  },
+  
+  addPreviewToFragment: function(fragment, author, id, image, title) {
+    const previewElement = this.createPreviewElement(author, id, image, title);
+    fragment.appendChild(previewElement);
+  }
+};
+const fragment = document.createDocumentFragment()
 
-  starting.appendChild(element);
+for (const { author, id, image, title } of books.slice(0, BOOKS_PER_PAGE)) {
+  previewModule.addPreviewToFragment(fragment, author, id, image, title)
 };
-};
+document.querySelector("[data-list-items]").appendChild(fragment)
+document.querySelector("[data-list-button]").enabled = (books.length - (page * BOOKS_PER_PAGE)) < 1
+
+
+// const starting = document.createDocumentFragment();
+
+// const preview = (author, id, image, title) => {
+//   const element = document.createElement("button");
+//   element.classList = "preview";
+//   element.setAttribute("data-preview", id);
+
+//   element.innerHTML = `
+//     <img
+//         class="preview__image"
+//         src="${image}"
+//     />
+    
+//     <div class="preview__info">
+//         <h3 class="preview__title">${title}</h3>
+//         <div class="preview__author">${authors[author]}</div>
+//     </div>
+// `;
+
+//   starting.appendChild(element);
+// };
 
 /**
  * Called the function created above, to avoid rewritting the same code over and over again and appended the function starting to data-list-items
  */
 
-for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
-  preview(author, id, image, title);
-}
+// for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
+//   preview(author, id, image, title);
+// }
 
-document.querySelector("[data-list-items]").appendChild(starting);
+// document.querySelector("[data-list-items]").appendChild(starting);
 
 /**
  *
@@ -94,8 +128,8 @@ document.querySelector("[data-settings-form]").addEventListener('submit', (event
 document.querySelector("[data-list-button]").innerText = `Show more (${
   books.length - BOOKS_PER_PAGE
 })`;
-document.querySelector("[data-list-button]").enabled =
-  matches.length - page * BOOKS_PER_PAGE > 0; //changed disabled to enabled to allow the show more button to work
+// document.querySelector("[data-list-button]").enabled =
+//   matches.length - page * BOOKS_PER_PAGE > 0; //changed disabled to enabled to allow the show more button to work
 
 /**
  * This function was created to be able to call it whenever it needs to be called. It is for the show more button which will allow the user to be able to press it and be able to view more books
@@ -180,7 +214,7 @@ document
     document.querySelector("[data-list-items]").innerHTML = "";
 
     /**
-     * Called the function created above, to avoid rewritting the same code over and over again and appended the function starting to data-list-items
+     * Called the function created above, to avoid rewritting the same code over and over again and appended the function fragment to data-list-items
      */
     for (const { author, id, image, title } of result.slice(
       0,
@@ -189,7 +223,7 @@ document
       preview(author, id, image, title);
     }
 
-    document.querySelector("[data-list-items]").appendChild(starting);
+    document.querySelector("[data-list-items]").appendChild(fragment);
 
     document.querySelector("[data-list-button]").disabled =
       matches.length - page * BOOKS_PER_PAGE < 1;
@@ -211,7 +245,7 @@ document.querySelector("[data-list-button]").addEventListener("click", () => {
     preview(author, id, image, title);
   }
 
-  document.querySelector("[data-list-items]").appendChild(starting);
+  document.querySelector("[data-list-items]").appendChild(fragment);
   page += 1;
 });
 

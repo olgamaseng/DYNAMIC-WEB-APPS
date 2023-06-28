@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tally Count</title>
+
+        <link rel="stylesheet" href="../src/css/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap"
+            rel="stylesheet">
+
+        <script src="/script.js" defer></script>
+    </head>
+
+    <body>
+        <header class="header">
+            <h1 class="header_title">Tally Count</h1>
+        </header>
+        <aside class="controls">
+            <label>
+                <span>Diplay</span>
+                <select>
+                    <option>Single</option>
+                    <option>Multiple</option>
+                </select>
+            </label>
+
+            <label>
+                <span>Counter</span>
+                <select>
+                    <option>Counter 1</option>
+                    <option>Counter 2</option>
+                    <option>Counter 3</option>
+                </select>
+            </label>
+
+            <button> Settings</button>
+        </aside>
+
+        <main class="counter">
+            <input class="counter_value" data-keys="number" readonly value="0">
+            <div class="counter_actions">
+                <button data-keys="subtract" class="counter_button
+                    counter_button_first"> -</button>
+                <button data-keys="add" class="counter_button"> +</button>
+            </div>
+        </main>
+        <footer class="footer">
+            Inspired by <a class="footer_link" href="https://tallycount.app/">Tally
+                count</a>. Note that is merely a student practice project for
+            learning Javascript.
+        </footer>
+    </body>
+
+</html>
