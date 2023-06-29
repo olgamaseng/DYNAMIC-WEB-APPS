@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Tally Count</title>
 
-        <link rel="stylesheet" href="../src/css/style.css" />
+        <link rel="stylesheet" href="./style.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,10 @@
             href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap"
             rel="stylesheet">
 
-        <script src="/script.js" defer></script>
+        <script src="./script.js" defer></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.2/cdn/themes/light.css" />
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.2/cdn/shoelace-autoloader.js"></script>
+
     </head>
 
     <body>
@@ -24,32 +27,29 @@
             <h1 class="header_title">Tally Count</h1>
         </header>
         <aside class="controls">
-            <label>
-                <span>Diplay</span>
-                <select>
-                    <option>Single</option>
-                    <option>Multiple</option>
-                </select>
-            </label>
 
-            <label>
-                <span>Counter</span>
-                <select>
-                    <option>Counter 1</option>
-                    <option>Counter 2</option>
-                    <option>Counter 3</option>
-                </select>
-            </label>
-
-            <button> Settings</button>
-        </aside>
+                <sl-select label="Display">
+                    <sl-option value="option-1">Single</sl-option>
+                    <sl-option value="option-2">Multiple</sl-option>
+                  </sl-select>
+            
+                <sl-select label="Counter">
+                    <sl-option value="option-1">Counter 1</sl-option>
+                    <sl-option value="option-2">Counter 2</sl-option>
+                    <sl-option value="option-3">counter 3</sl-option>
+                  </sl-select>
+        
+            <sl-button> Settings</sl-button>
+            <sl-button data-keys="reset"> reset</sl-button>
+            
 
         <main class="counter">
             <input class="counter_value" data-keys="number" readonly value="0">
             <div class="counter_actions">
-                <button data-keys="subtract" class="counter_button
-                    counter_button_first"> -</button>
-                <button data-keys="add" class="counter_button"> +</button>
+                <sl-button data-keys="subtract" class="counter_button
+                    counter_button_first"> -</sl-button>
+                <sl-button data-keys="add" class="counter_button"> +</sl-button>
+               
             </div>
         </main>
         <footer class="footer">

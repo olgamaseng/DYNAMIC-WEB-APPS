@@ -48,7 +48,7 @@ document.querySelector("[data-list-button]").enabled = (books.length - (page * B
 // const starting = document.createDocumentFragment();
 
 // const preview = (author, id, image, title) => {
-//   const element = document.createElement("button");
+//   const element = document.c reateElement("button");
 //   element.classList = "preview";
 //   element.setAttribute("data-preview", id);
 
